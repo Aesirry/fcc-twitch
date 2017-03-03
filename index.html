@@ -5,13 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Twitch Viewr</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="styles.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="scripts.js"></script>
   </head>
   <body>
-    <div class="container">
+
+    <div class="container-fluid presentation">
+      <h1>Twitch Page</h1>
+      <h3>Online</h3>
+      <h3>Offline</h3>
+    </div>
+
+    <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Online</a></li>
+        <li><a href="#">Offline</a></li>
+      </ul>
+    </nav>
+
+    <div class="container users">
       <div class="container streamer-box">
         <img src="#" width="100px" alt="name of streamer" />
         <a href="#"></a>
@@ -25,5 +39,6 @@
         <a href="#"></a>
       </div>
     </div>
+
   </body>
 </html>

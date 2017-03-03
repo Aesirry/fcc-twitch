@@ -2,6 +2,24 @@
 /* bgcolor black */
 /* #737373 for offline profiles */
 /* #9bbe5a */
-div{
-  background-color: black;
+body{
+  background-color:#737373;
+}
+
+.affix {
+  top: 0;
+  width: 100%;
+}
+
+.affix + .container-fluid {
+  padding-top: 70px;
+}
+
+.presentation {
+  background-color:#6441A4;
+  height:200px;
+}
+
+.users {
+  height:10000px;
 }
