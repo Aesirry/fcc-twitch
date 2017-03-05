@@ -1,11 +1,7 @@
 /* twitch color scheme #6441A4 */
 /* bgcolor black */
 /* #737373 for offline profiles */
-/* #9bbe5a */
-body{
-  background-color:#737373;
-}
-
+/* #9bbe5a online*/
 .affix {
   top: 0;
   width: 100%;
@@ -22,4 +18,14 @@ body{
 
 .users {
   height:10000px;
+}
+
+.online{
+  color: black;
+  background-color: #9bbe5a;
+}
+
+.offline{
+  color: white;
+  background-color: #737373;
 }
