@@ -12,7 +12,7 @@
 
 $(document).ready(function() {
   var profiles = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas"];
-    for (var i = 0; i < profile.length; i++) {
+    for (var i = 0; i < profiles.length; i++) {
       // get stream info
       $.getJSON('https://wind-bow.gomix.me/twitch-api/streams/' + profiles[i] + '?callback=?', function(data) {
         console.log(data);
@@ -26,5 +26,4 @@ $(document).ready(function() {
         console.log(data);
       });
     }
-  });
 });
