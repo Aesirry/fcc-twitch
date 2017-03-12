@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Twitch Viewr</title>
+    <title>Twitch Viewer</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="styles.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -11,20 +11,40 @@
     <script src="scripts.js"></script>
   </head>
   <body>
-
-    <div class="container-fluid presentation">
-      <h1>Twitch Page</h1>
-    </div>
-
-    <nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Online</a></li>
-        <li><a href="#">Offline</a></li>
-      </ul>
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">FCC Twitch Viewer</a>
+        </div>
+        <button class="btn btn-success navbar-btn">Online</button>
+        <button class="btn btn-danger navbar-btn">Offline</button>
+        <button class="btn btn-default navbar-btn">Not Found</button>
+      </div>
     </nav>
 
-    <div class="container users panel-group">
-      
+    <div class="container">
+      <div class="panel-group users">
+        <div class="user panel online">
+          <div class="panel-heading">
+            <a class="site-link" href="#"><h5>Dota2ruhub</h5></a>
+          </div>
+          <div class="panel-body">
+              <img class="img-circle user-logo" src="https://static-cdn.jtvnw.net/jtv_user_pictures/dota2ruhub-profile_image-10d7fba97bdc3e90-300x300.png" />
+          </div>
+        </div>
+      </div>
+      <div class="panel-group users">
+        <div class="panel offline">
+          <div class="panel-heading">
+            <h5>Dota2ruhub</h5>
+          </div>
+          <div class="panel-body">
+            <div>
+              <img class="img-circle user-logo" src="https://static-cdn.jtvnw.net/jtv_user_pictures/dota2ruhub-profile_image-10d7fba97bdc3e90-300x300.png" />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
   </body>

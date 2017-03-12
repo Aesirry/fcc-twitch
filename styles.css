@@ -2,13 +2,9 @@
 /* bgcolor black */
 /* #737373 for offline profiles */
 /* #9bbe5a online*/
-.affix {
-  top: 0;
-  width: 100%;
-}
 
-.affix + .container-fluid {
-  padding-top: 70px;
+body{
+  background-color: #6441a5;
 }
 
 .presentation {
@@ -16,8 +12,9 @@
   height:200px;
 }
 
-.users {
-  height:10000px;
+.user-logo {
+  height: 100px;
+  width: 100px;
 }
 
 .online{
@@ -28,4 +25,14 @@
 .offline{
   color: white;
   background-color: #737373;
+}
+
+.panel-heading {
+  background-color: black;
+  color: #fff;
+  padding: 2px 15px;
+}
+
+.user {
+  margin-top: -10px;
 }
