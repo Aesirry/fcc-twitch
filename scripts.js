@@ -33,14 +33,19 @@ $(document).ready(function() {
           result += '</div>';
           result += '</div>';
           $(".users").append(result);
-          // $.getJSON('https://wind-bow.gomix.me/twitch-api/streams/' + profiles[i] + '?callback=?', function(data) {
-          //   if (data.stream != null){
-          //     $('.panel-body').addClass('online');
-          //   }
-          //   else {
-          //     $('.panel-body').removeClass('online').addClass('offline');
-          //   }
-          // });
         });
       }
 }); //document.ready
+
+// DEALING WITH THE BUTTON PRESS
+// first get all the streams information.
+// if one of the buttons is clicked then add the display_name to the according arrar..
+// the condition (online or offline is equals to the the button pressed)
+// display the profiles that are in the array
+
+// make the first json request to be to streams
+// put online ones in online array
+// put offline ones in offline array
+// in main page iterate though general array and just assign classes accordingly.
+// if one of the buttons is pressed. then just render either the online or offline array.
+// for the accounts that were not found take the username from the main array. not from the JSON request.
