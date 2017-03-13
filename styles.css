@@ -7,11 +7,6 @@ body{
   background-color: #6441a5;
 }
 
-.presentation {
-  background-color:#6441A4;
-  height:200px;
-}
-
 .user-logo {
   height: 100px;
   width: 100px;
@@ -33,6 +28,10 @@ body{
   padding: 2px 15px;
 }
 
-.user {
-  margin-top: -10px;
+.text-container {
+  margin-left: 13px;
+}
+
+.str-btn {
+  margin-top: 11px;
 }
