@@ -17,17 +17,18 @@ var profiles = ["ESL_SC2","brunofin", "comster404", "OgamingSC2", "cretetion", "
 for (var i = 0; i < profiles.length; i++){
   var usersPromise = $.getJSON('https://wind-bow.gomix.me/twitch-api/users/' + profiles[i] + '?callback=?');
   var streamsPromise = $.getJSON('https://wind-bow.gomix.me/twitch-api/streams/' + profiles[i] + '?callback=?');
+  var channelsPromise = $.getJSON('https://wind-bow.gomix.me/twitch-api/channels/' + profiles[i] + '?callback=?');
   var noProfile = [];
   var online = [];
   var offline =[];
 
-  $.when(usersPromise, streamsPromise).then(function(userData, streamData) {
+  $.when(usersPromise, streamsPromise, channelsPromise).then(function(userData, streamData, channelData) {
     if (userData[0].hasOwnProperty("error")) {
       noProfile.push(userData[0]);
       return true;
     }
     else if (streamData[0].stream == null){
-      offline.push(streamData[0]);
+      offline.push(channelData[0]);
       return true;
     }
     else {
@@ -35,23 +36,111 @@ for (var i = 0; i < profiles.length; i++){
     }
   }); // $.when
 } // for loop
-console.log(noProfile);
-console.log(online);
-console.log(offline);
-// iterate through profiles again
+
+$("#all").click(function(event){
+  $(".users").empty();
+  for (var i = 0; i < online.length; i++){
+    var result = '<div class="panel user online">';
+    result += '<div class="panel-body row">';
+    result += '<div class="col-md-1">';
+    result += '<img class="img-circle user-logo" src="' + online[i].stream.channel.logo + '" />';
+    result += '</div>';
+    result += '<div>';
+    result += '<div class="col-md-9 text-container">';
+    result += '<h4>' + online[i].stream.channel.name + '</h4>';
+    result += '<p>' + online[i].stream.channel.status + '</p>';
+    result += '<a href="' + online[i].stream.channel.url + '" target="_blank" class="btn btn-info str-btn" role="button">Go to Stream</a>';
+    result += '</div>';
+    result += '</div>';
+    result += '</div>';
+    result += '</div>';
+    $(".users").append(result);
+  }
+  for (var i = 0; i < offline.length; i++){
+    var result = '<div class="panel user offline">';
+    result += '<div class="panel-body row">';
+    result += '<div class="col-md-1">';
+    result += '<img class="img-circle user-logo" src="' + offline[i].logo + '" />';
+    result += '</div>';
+    result += '<div>';
+    result += '<div class="col-md-9 text-container">';
+    result += '<h4>' + offline[i].name + '</h4>';
+    result += '</div>';
+    result += '</div>';
+    result += '</div>';
+    result += '</div>';
+    $(".users").append(result);
+  }
+  for (var i = 0; i < noProfile.length; i++){
+    var result = '<div class="panel user profile-not-found">';
+    result += '<div class="panel-body row">';
+    result += '<div class="col-md-1">';
+    result += '<img class="img-circle user-logo" src="undefined" />';
+    result += '</div>';
+    result += '<div>';
+    result += '<div class="col-md-9 text-container">';
+    result += '<h4>' + noProfile[i].message + '</h4>';
+    result += '</div>';
+    result += '</div>';
+    result += '</div>';
+    result += '</div>';
+    $(".users").append(result);
+  }
+}); // all button
+$("#online").click(function(event){
+  $(".users").empty();
+  for (var i = 0; i < online.length; i++){
+    var result = '<div class="panel user online">';
+    result += '<div class="panel-body row">';
+    result += '<div class="col-md-1">';
+    result += '<img class="img-circle user-logo" src="' + online[i].stream.channel.logo + '" />';
+    result += '</div>';
+    result += '<div>';
+    result += '<div class="col-md-9 text-container">';
+    result += '<h4>' + online[i].stream.channel.name + '</h4>';
+    result += '<p>' + online[i].stream.channel.status + '</p>';
+    result += '<a href="' + online[i].stream.channel.url + '" target="_blank" class="btn btn-info str-btn" role="button">Go to Stream</a>';
+    result += '</div>';
+    result += '</div>';
+    result += '</div>';
+    result += '</div>';
+    $(".users").append(result);
+  }
+}); // online button
+$("#offline").click(function(event){
+  $(".users").empty();
+  for (var i = 0; i < offline.length; i++){
+    var result = '<div class="panel user offline">';
+    result += '<div class="panel-body row">';
+    result += '<div class="col-md-1">';
+    result += '<img class="img-circle user-logo" src="' + offline[i].logo + '" />';
+    result += '</div>';
+    result += '<div>';
+    result += '<div class="col-md-9 text-container">';
+    result += '<h4>' + offline[i].name + '</h4>';
+    result += '</div>';
+    result += '</div>';
+    result += '</div>';
+    result += '</div>';
+    $(".users").append(result);
+  }
+}); // offline button
+$("#not-found").click(function(event){
+  $(".users").empty();
+  for (var i = 0; i < noProfile.length; i++){
+    var result = '<div class="panel user profile-not-found">';
+    result += '<div class="panel-body row">';
+    result += '<div class="col-md-1">';
+    result += '<img class="img-circle user-logo" src="undefined" />';
+    result += '</div>';
+    result += '<div>';
+    result += '<div class="col-md-9 text-container">';
+    result += '<h4>' + noProfile[i].message + '</h4>';
+    result += '</div>';
+    result += '</div>';
+    result += '</div>';
+    result += '</div>';
+    $(".users").append(result);
+}
+}); // offline button
 }); // $.(document).ready
-
-
-// result += '<div class="panel-body row">';
-// result += '<div class="col-md-1">';
-// result += '<img class="img-circle user-logo" src="' + streamData.logo + '" />';
-// result += '</div>';
-// result += '<div>';
-// result += '<div class="col-md-9 text-container">';
-// result += '<h4>' + streamData.display_name + '</h4>';
-// result += '<a href="' + profile_home + '" target="_blank" class="btn btn-info str-btn" role="button">Go to Stream</a>';
-// result += '</div>';
-// result += '</div>';
-// result += '</div>';
-// result += '</div>';
-// $(".users").append(result);
