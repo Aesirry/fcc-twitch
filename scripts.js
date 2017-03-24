@@ -25,16 +25,58 @@ for (var i = 0; i < profiles.length; i++){
   $.when(usersPromise, streamsPromise, channelsPromise).then(function(userData, streamData, channelData) {
     if (userData[0].hasOwnProperty("error")) {
       noProfile.push(userData[0]);
+      var result = '<div class="panel user profile-not-found">';
+      result += '<div class="panel-body row">';
+      result += '<div class="col-md-1">';
+      result += '<img class="img-circle user-logo" src="undefined" />';
+      result += '</div>';
+      result += '<div>';
+      result += '<div class="col-md-9 text-container">';
+      result += '<h4>' + userData[0].message + '</h4>';
+      result += '</div>';
+      result += '</div>';
+      result += '</div>';
+      result += '</div>';
+      $(".users").append(result);
       return true;
     }
     else if (streamData[0].stream == null){
       offline.push(channelData[0]);
+      var result = '<div class="panel user offline">';
+      result += '<div class="panel-body row">';
+      result += '<div class="col-md-1">';
+      result += '<img class="img-circle user-logo" src="' + channelData[0].logo + '" />';
+      result += '</div>';
+      result += '<div>';
+      result += '<div class="col-md-9 text-container">';
+      result += '<h4>' + channelData[0].name + '</h4>';
+      result += '</div>';
+      result += '</div>';
+      result += '</div>';
+      result += '</div>';
+      $(".users").append(result);
       return true;
     }
     else {
       online.push(streamData[0]);
+      var result = '<div class="panel user online">';
+      result += '<div class="panel-body row">';
+      result += '<div class="col-md-1">';
+      result += '<img class="img-circle user-logo" src="' + streamData[0].stream.channel.logo + '" />';
+      result += '</div>';
+      result += '<div>';
+      result += '<div class="col-md-9 text-container">';
+      result += '<h4>' + streamData[0].stream.channel.name + '</h4>';
+      result += '<p>' + streamData[0].stream.channel.status + '</p>';
+      result += '<a href="' + streamData[0].stream.channel.url + '" target="_blank" class="btn btn-info str-btn" role="button">Go to Stream</a>';
+      result += '</div>';
+      result += '</div>';
+      result += '</div>';
+      result += '</div>';
+      $(".users").append(result);
     }
   }); // $.when
+
 } // for loop
 
 $("#all").click(function(event){
@@ -118,6 +160,7 @@ $("#offline").click(function(event){
     result += '<div>';
     result += '<div class="col-md-9 text-container">';
     result += '<h4>' + offline[i].name + '</h4>';
+    result += '<h4>This User is Offline</h4>';
     result += '</div>';
     result += '</div>';
     result += '</div>';
