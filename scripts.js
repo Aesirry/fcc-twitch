@@ -1,5 +1,4 @@
-// sort continuously with online profiles on top
-// have to have freecodecamp profiles, brunofin, comster404 (get this from streams)
+// have to have freecodecamp, brunofin, comster404 (get this from streams)
 // click on status output and go to the stream directly.
 // can see additional details about what the streamer is streaming.(get this from channel)
 
@@ -14,38 +13,45 @@
 // to see the stream just use plain old url like https://www.twitch.tv/summit1g
 
 $(document).ready(function() {
-  var profiles = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas", "dota2ruhub"];
-    for (var i = 0; i < profiles.length; i++) {
-      $.getJSON('https://wind-bow.gomix.me/twitch-api/users/' + profiles[i] + '?callback=?', function(data) {
-          var profile_home = 'https://www.twitch.tv/' + data.name;
-          var result = '<div class="panel user online">';
-          result += '<div class="panel-body row">';
-          result += '<div class="col-md-1">';
-          result += '<img class="img-circle user-logo" src="' + data.logo + '" />';
-          result += '</div>';
-          result += '<div>';
-          result += '<div class="col-md-9 text-container">';
-          result += '<h4>' + data.display_name + '</h4>';
-          // result += '<span>' + data.channel.status + '</span><br />'; this comes from the stream request
-          result += '<a href="' + profile_home + '" target="_blank" class="btn btn-info str-btn" role="button">Go to Stream</a>';
-          result += '</div>';
-          result += '</div>';
-          result += '</div>';
-          result += '</div>';
-          $(".users").append(result);
-        });
-      }
-}); //document.ready
+var profiles = ["ESL_SC2","brunofin", "comster404", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas", "dota2ruhub"];
+for (var i = 0; i < profiles.length; i++){
+  var usersPromise = $.getJSON('https://wind-bow.gomix.me/twitch-api/users/' + profiles[i] + '?callback=?');
+  var streamsPromise = $.getJSON('https://wind-bow.gomix.me/twitch-api/streams/' + profiles[i] + '?callback=?');
+  var noProfile = [];
+  var online = [];
+  var offline =[];
 
-// DEALING WITH THE BUTTON PRESS
-// first get all the streams information.
-// if one of the buttons is clicked then add the display_name to the according arrar..
-// the condition (online or offline is equals to the the button pressed)
-// display the profiles that are in the array
+  $.when(usersPromise, streamsPromise).then(function(userData, streamData) {
+    if (userData[0].hasOwnProperty("error")) {
+      noProfile.push(userData[0]);
+      return true;
+    }
+    else if (streamData[0].stream == null){
+      offline.push(streamData[0]);
+      return true;
+    }
+    else {
+      online.push(streamData[0]);
+    }
+  }); // $.when
+} // for loop
+console.log(noProfile);
+console.log(online);
+console.log(offline);
+// iterate through profiles again
+}); // $.(document).ready
 
-// make the first json request to be to streams
-// put online ones in online array
-// put offline ones in offline array
-// in main page iterate though general array and just assign classes accordingly.
-// if one of the buttons is pressed. then just render either the online or offline array.
-// for the accounts that were not found take the username from the main array. not from the JSON request.
+
+// result += '<div class="panel-body row">';
+// result += '<div class="col-md-1">';
+// result += '<img class="img-circle user-logo" src="' + streamData.logo + '" />';
+// result += '</div>';
+// result += '<div>';
+// result += '<div class="col-md-9 text-container">';
+// result += '<h4>' + streamData.display_name + '</h4>';
+// result += '<a href="' + profile_home + '" target="_blank" class="btn btn-info str-btn" role="button">Go to Stream</a>';
+// result += '</div>';
+// result += '</div>';
+// result += '</div>';
+// result += '</div>';
+// $(".users").append(result);

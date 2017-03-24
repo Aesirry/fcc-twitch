@@ -19,6 +19,11 @@ body{
 
 .offline{
   color: white;
+  background-color: #a54150;
+}
+
+.profile-not-found{
+  color: white;
   background-color: #737373;
 }
 
